@@ -1,6 +1,6 @@
 # This is the main namespace for your gem
-module Blankgem
+module Groundskeeper
   # Your code goes here...
 end
 
-require_relative "blankgem/version"
+require_relative "groundskeeper/version"

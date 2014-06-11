@@ -1,10 +1,10 @@
-blankgem
+groundskeeper
 --------
 
-  - [![Version](https://badge.fury.io/rb/blankgem.png)](https://rubygems.org/gems/blankgem)
-  - [![Climate](https://codeclimate.com/github/krainboltgreene/blankgem.png)](https://codeclimate.com/github/krainboltgreene/blankgem)
-  - [![Build](http://img.shields.io/travis-ci/krainboltgreene/blankgem.png)](https://travis-ci.org/krainboltgreene/blankgem)
-  - [![Dependencies](https://gemnasium.com/krainboltgreene/blankgem.png)](https://gemnasium.com/krainboltgreene/blankgem)
+  - [![Version](https://badge.fury.io/rb/groundskeeper.png)](https://rubygems.org/gems/groundskeeper)
+  - [![Climate](https://codeclimate.com/github/krainboltgreene/groundskeeper.png)](https://codeclimate.com/github/krainboltgreene/groundskeeper)
+  - [![Build](http://img.shields.io/travis-ci/krainboltgreene/groundskeeper.png)](https://travis-ci.org/krainboltgreene/groundskeeper)
+  - [![Dependencies](https://gemnasium.com/krainboltgreene/groundskeeper.png)](https://gemnasium.com/krainboltgreene/groundskeeper)
   - [![Gittip](http://img.shields.io/gittip/krainboltgreene.png)](https://www.gittip.com/krainboltgreene/)
   - [![License](http://img.shields.io/license/MIT.png?color=green)](http://opensource.org/licenses/MIT)
 
@@ -22,7 +22,7 @@ Installing
 
 Add this line to your application's Gemfile:
 
-    gem "blankgem", "~> 1.0"
+    gem "groundskeeper", "~> 1.0"
 
 And then execute:
 
@@ -30,7 +30,7 @@ And then execute:
 
 Or install it yourself with:
 
-    $ gem install blankgem
+    $ gem install groundskeeper
 
 
 Contributing
