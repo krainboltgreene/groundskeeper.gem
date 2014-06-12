@@ -2,9 +2,9 @@ groundskeeper
 -------------
 
   - [![Version](https://badge.fury.io/rb/groundskeeper.png)](https://rubygems.org/gems/groundskeeper)
-  - [![Climate](https://codeclimate.com/github/krainboltgreene/groundskeeper.png)](https://codeclimate.com/github/krainboltgreene/groundskeeper)
-  - [![Build](http://img.shields.io/travis-ci/krainboltgreene/groundskeeper.png)](https://travis-ci.org/krainboltgreene/groundskeeper)
-  - [![Dependencies](https://gemnasium.com/krainboltgreene/groundskeeper.png)](https://gemnasium.com/krainboltgreene/groundskeeper)
+  - [![Climate](https://codeclimate.com/github/krainboltgreene/groundskeeper.gem.png)](https://codeclimate.com/github/krainboltgreene/groundskeeper.gem)
+  - [![Build](http://img.shields.io/travis-ci/krainboltgreene/groundskeeper.gem.png)](https://travis-ci.org/krainboltgreene/groundskeeper.gem)
+  - [![Dependencies](https://gemnasium.com/krainboltgreene/groundskeeper.gem.png)](https://gemnasium.com/krainboltgreene/groundskeeper.gem)
   - [![Gittip](http://img.shields.io/gittip/krainboltgreene.png)](https://www.gittip.com/krainboltgreene/)
   - [![License](http://img.shields.io/license/MIT.png?color=green)](http://opensource.org/licenses/MIT)
 
