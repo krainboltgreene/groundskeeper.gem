@@ -5,8 +5,8 @@ module Groundskeeper
     MODEL_KEY = :model
     QUERY_KEY = :query
     DEFAULT_KEY = :default
-    QUERY_DEFAULT = ->(model, id) do
-      model.find(id)
+    QUERY_DEFAULT = ->(model, slug) do
+      model.find_by_slug(slug)
     end
 
     def initialize(app, options = {})
