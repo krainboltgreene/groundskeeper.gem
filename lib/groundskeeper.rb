@@ -1,6 +1,8 @@
+require "rack"
+
 # This is the main namespace for your gem
 module Groundskeeper
-  # Your code goes here...
-end
+  require_relative "groundskeeper/version"
+  require_relative "groundskeeper/middleware"
 
-require_relative "groundskeeper/version"
+end
