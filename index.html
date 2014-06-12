@@ -1,0 +1,182 @@
+<!doctype html>
+<!-- The Time Machine GitHub pages theme was designed and developed by Jon Rohan, on Feb 7, 2012. -->
+<!-- Follow him for fun. http://twitter.com/jonrohan. Tail his code on http://github.com/jonrohan -->
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <link rel="stylesheet" href="stylesheets/stylesheet.css" media="screen"/>
+  <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="javascripts/script.js"></script>
+
+  <title>Groundskeeper.gem</title>
+  <meta name="description" content="A simple multi-tenancy middleware with options">
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <header>
+      <h1 class="title">Groundskeeper.gem</h1>
+    </header>
+    <div id="container">
+      <p class="tagline">A simple multi-tenancy middleware with options</p>
+      <div id="main" role="main">
+        <div class="download-bar">
+        <div class="inner">
+          <a href="https://github.com/krainboltgreene/groundskeeper.gem/tarball/master" class="download-button tar"><span>Download</span></a>
+          <a href="https://github.com/krainboltgreene/groundskeeper.gem/zipball/master" class="download-button zip"><span>Download</span></a>
+          <a href="https://github.com/krainboltgreene/groundskeeper.gem" class="code">View Groundskeeper.gem on GitHub</a>
+        </div>
+        <span class="blc"></span><span class="trc"></span>
+        </div>
+        <article class="markdown-body">
+          <ul>
+<li><a href="https://rubygems.org/gems/groundskeeper"><img src="https://badge.fury.io/rb/groundskeeper.png" alt="Version"></a></li>
+<li><a href="https://codeclimate.com/github/krainboltgreene/groundskeeper"><img src="https://codeclimate.com/github/krainboltgreene/groundskeeper.png" alt="Climate"></a></li>
+<li><a href="https://travis-ci.org/krainboltgreene/groundskeeper"><img src="http://img.shields.io/travis-ci/krainboltgreene/groundskeeper.png" alt="Build"></a></li>
+<li><a href="https://gemnasium.com/krainboltgreene/groundskeeper"><img src="https://gemnasium.com/krainboltgreene/groundskeeper.png" alt="Dependencies"></a></li>
+<li><a href="https://www.gittip.com/krainboltgreene/"><img src="http://img.shields.io/gittip/krainboltgreene.png" alt="Gittip"></a></li>
+<li><a href="http://opensource.org/licenses/MIT"><img src="http://img.shields.io/license/MIT.png?color=green" alt="License"></a></li>
+</ul><p>This gem helps you parse various parts of a request and determine the owner
+of the request in a multi-tenant environment.</p>
+
+<h1>
+<a name="using" class="anchor" href="#using"><span class="octicon octicon-link"></span></a>Using</h1>
+
+<p>Simply add the middleware to your stack with the options required as explained below:</p>
+
+<p><strong>Example: Rails</strong></p>
+
+<div class="highlight highlight-ruby"><pre><span class="c1"># config/application.rb</span>
+
+<span class="c1">#...</span>
+
+<span class="k">module</span> <span class="nn">Testapp</span>
+  <span class="k">class</span> <span class="nc">Application</span> <span class="o">&lt;</span> <span class="no">Rails</span><span class="o">::</span><span class="no">Application</span>
+
+
+    <span class="c1"># ...</span>
+
+    <span class="n">config</span><span class="o">.</span><span class="n">middleware</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="no">Groundskeeper</span><span class="o">::</span><span class="no">Middleware</span><span class="o">::</span><span class="no">Subdomain</span><span class="p">,</span> <span class="ss">model</span><span class="p">:</span> <span class="s2">"Company"</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+
+<p>Now during any request the 3rd-level subdomain (<code>www</code> in <code>www.example.com</code>) will be used to find the company.</p>
+
+<p>The exect query is as follows:</p>
+
+<div class="highlight highlight-ruby"><pre><span class="n">model</span><span class="o">.</span><span class="n">find_by_slug</span><span class="p">(</span><span class="n">slug</span><span class="p">)</span>
+</pre></div>
+
+<p>To change the query lookup simply provide Groundskeeper with the prefered query:</p>
+
+<div class="highlight highlight-ruby"><pre><span class="o">.</span><span class="n">.</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="no">Groundskeeper</span><span class="o">::</span><span class="no">Middleware</span><span class="o">::</span><span class="no">Subdomain</span><span class="p">,</span> <span class="ss">model</span><span class="p">:</span> <span class="s2">"Company"</span><span class="p">,</span> <span class="ss">query</span><span class="p">:</span> <span class="o">-&gt;</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="nb">name</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="nb">name</span><span class="p">:</span> <span class="nb">name</span><span class="p">)</span><span class="o">.</span><span class="n">first</span>
+<span class="p">})</span>
+</pre></div>
+
+<p>If you want to look at the 2nd-level subdomain (<code>example</code> in <code>www.example.com</code>) just tell Groundskeeper to do that:</p>
+
+<div class="highlight highlight-ruby"><pre><span class="o">.</span><span class="n">.</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="no">Groundskeeper</span><span class="o">::</span><span class="no">Middleware</span><span class="o">::</span><span class="no">Subdomain</span><span class="p">,</span> <span class="ss">model</span><span class="p">:</span> <span class="s2">"Company"</span><span class="p">,</span> <span class="ss">depth</span><span class="p">:</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+<p>The number is related to the level, so <code>com</code> in <code>www.example.com</code> is the 1st or <code>1</code>.</p>
+
+<p>If you're looking to be flexible in what subdomain you're looking for just tell Groundskeeper how:</p>
+
+<div class="highlight highlight-ruby"><pre><span class="o">.</span><span class="n">.</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="no">Groundskeeper</span><span class="o">::</span><span class="no">Middleware</span><span class="o">::</span><span class="no">Subdomain</span><span class="p">,</span> <span class="ss">model</span><span class="p">:</span> <span class="s2">"Company"</span><span class="p">,</span> <span class="ss">parse</span><span class="p">:</span> <span class="o">-&gt;</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">depth</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="n">fqdn</span><span class="o">.</span><span class="n">end_with?</span><span class="p">(</span><span class="s2">".awesome.com"</span><span class="p">)</span>
+    <span class="n">fqdn</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"."</span><span class="p">)</span><span class="o">[</span><span class="n">depth</span><span class="o">]</span>
+  <span class="k">else</span>
+    <span class="n">fqdn</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"."</span><span class="p">)</span><span class="o">[-</span><span class="mi">2</span><span class="o">]</span>
+  <span class="k">end</span>
+<span class="p">})</span>
+</pre></div>
+
+<p>This tells Groundskeeper to find the tenant's identifier based on the 3rd level subdomain if it ends in <code>.awesome.com</code> otherwise look at the 2nd level subdomain.
+This is the formula for basing tenancy on subdomain or custom domain name.</p>
+
+<p><strong>NOTE</strong>: Parameter and Header are currently not written.</p>
+
+<h1>
+<a name="installing" class="anchor" href="#installing"><span class="octicon octicon-link"></span></a>Installing</h1>
+
+<p>Add this line to your application's Gemfile:</p>
+
+<pre><code>gem "groundskeeper", "~&gt; 1.0"
+</code></pre>
+
+<p>And then execute:</p>
+
+<pre><code>$ bundle
+</code></pre>
+
+<p>Or install it yourself with:</p>
+
+<pre><code>$ gem install groundskeeper
+</code></pre>
+
+<h1>
+<a name="contributing" class="anchor" href="#contributing"><span class="octicon octicon-link"></span></a>Contributing</h1>
+
+<ol>
+<li>Fork it</li>
+<li>Create your feature branch (<code>git checkout -b my-new-feature</code>)</li>
+<li>Commit your changes (<code>git commit -am 'Add some feature'</code>)</li>
+<li>Push to the branch (<code>git push origin my-new-feature</code>)</li>
+<li>Create new Pull Request</li>
+</ol><h1>
+<a name="licensing" class="anchor" href="#licensing"><span class="octicon octicon-link"></span></a>Licensing</h1>
+
+<p>Copyright (c) 2014 Kurtis Rainbolt-Greene</p>
+
+<p>MIT License</p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+        </article>
+      </div>
+    </div>
+    <footer>
+      <div class="owner">
+      <p><a href="https://github.com/krainboltgreene" class="avatar"><img src="https://avatars3.githubusercontent.com/u/334809?s=60" width="48" height="48"/></a> <a href="https://github.com/krainboltgreene">krainboltgreene</a> maintains <a href="https://github.com/krainboltgreene/groundskeeper.gem">Groundskeeper.gem</a></p>
+
+
+      </div>
+      <div class="creds">
+        <small>This page generated using <a href="http://pages.github.com/">GitHub Pages</a><br/>theme by <a href="https://twitter.com/jonrohan/">Jon Rohan</a></small>
+      </div>
+    </footer>
+  </div>
+  <div class="current-section">
+    <a href="#top">Scroll to top</a>
+    <a href="https://github.com/krainboltgreene/groundskeeper.gem/tarball/master" class="tar">tar</a><a href="https://github.com/krainboltgreene/groundskeeper.gem/zipball/master" class="zip">zip</a><a href="" class="code">source code</a>
+    <p class="name"></p>
+  </div>
+
+  
+</body>
+</html>
