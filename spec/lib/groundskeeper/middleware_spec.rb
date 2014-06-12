@@ -21,7 +21,7 @@ describe Groundskeeper::Middleware do
       let(:options) do { model: model, default: default } end
 
       before(:each) do
-        allow(model).to receive(:find).and_return(nil)
+        allow(model).to receive(:find_by_slug).and_return(nil)
       end
 
       it "sets the default as the tenant" do

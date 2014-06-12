@@ -25,6 +25,6 @@ shared_context "rack setup" do
   let(:request_tenant) { request_env[Groundskeeper::Middleware::TENANT_KEY] }
 
   before(:each) do
-    allow(model).to receive(:find).and_return(instance)
+    allow(model).to receive(:find_by_slug).and_return(instance)
   end
 end
