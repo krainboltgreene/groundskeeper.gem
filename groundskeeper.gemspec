@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = Groundskeeper::VERSION
   spec.authors       = ["Kurtis Rainbolt-Greene"]
   spec.email         = ["me@kurtisrainboltgreene.name"]
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.summary       = %q{A simple multi-tenancy middleware with options}
   spec.description   = spec.summary
   spec.homepage      = "http://krainboltgreene.github.io/groundskeeper"
   spec.license       = "MIT"
